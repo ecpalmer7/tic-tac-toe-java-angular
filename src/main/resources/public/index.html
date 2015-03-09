@@ -15,7 +15,7 @@
 	
 		<div ng-controller="GameController as game">
 			<div class="gameon">
-				<div class="messageContainer" ng-show="gameover">
+				<div class="messageContainer" ng-show="game.gameover">
             		<div class="winmessage">{{game.winmessage}}<br/> GAME OVER</div>
         		</div>
 				<div class="tableContainer">
@@ -42,7 +42,7 @@
 		
 		<div class="gamehistory">
 			<div class="gamehistoryContainer">
-				<div ng-controller="HistoryController">
+				<div ng-controller="HistoryController as history">
 			
 					<h2 class="sub-header">Game History</h2>
 					<div class="table-responsive">
@@ -57,7 +57,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="game in games">
+								<tr ng-repeat="game in history.games">
 									<td>{{game.id}}</td>
 									<td>{{game.status}}</td>
 									<td>{{game.level}}</td>
