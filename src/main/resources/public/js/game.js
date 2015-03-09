@@ -6,7 +6,9 @@ app.controller("GameController", function Hello($scope, $http, $rootScope) {
 	// added
 	$scope.gameId = null;
 	$scope.game = null;
-	$scope.levelOptions = [{'value' : 'HARD', 'text' : 'Hard'}, {'value' : 'MEDIUM', 'text' : 'Medium'}, {'value' : 'EASY', 'text' : 'Easy'}];
+	$scope.levelOptions = [{'value' : 'HARD', 'text' : 'Hard'}, 
+	                       {'value' : 'MEDIUM', 'text' : 'Medium'}, 
+	                       {'value' : 'EASY', 'text' : 'Easy'}];
 	$scope.level = 'HARD';
 	
 	// original
@@ -18,34 +20,35 @@ app.controller("GameController", function Hello($scope, $http, $rootScope) {
     $scope.gameover = false;
     $scope.winmessage = '';
 
-    $scope.startOptions = [{'value' : 'system', 'text' : 'AI'}, {'value' : 'user', 'text' : 'Me'}];
+    $scope.startOptions = [{'value' : 'system', 'text' : 'AI'}, 
+                           {'value' : 'user', 'text' : 'Me'}];
     $scope.start = 'system';
 
     $scope.isGameStarted = false;
 	
 	$scope.rows = [
 	               [
-	                   {'id' : 'A11','letter': '','class': 'box'},
-	                   {'id' : 'A12','letter': '','class': 'box'},
-	                   {'id' : 'A13','letter': '','class': 'box'}
+	                   {'id' : '11','letter': '','class': 'box'},
+	                   {'id' : '12','letter': '','class': 'box'},
+	                   {'id' : '13','letter': '','class': 'box'}
 	               ],
 	               [
-	                   {'id' : 'B21','letter': '','class': 'box'},
-	                   {'id' : 'B22','letter': '','class': 'box'},
-	                   {'id' : 'B23','letter': '','class': 'box'}
+	                   {'id' : '21','letter': '','class': 'box'},
+	                   {'id' : '22','letter': '','class': 'box'},
+	                   {'id' : '23','letter': '','class': 'box'}
 	               ],
 	               [
-	                   {'id' : 'C31','letter': '','class': 'box'},
-	                   {'id' : 'C32','letter': '','class': 'box'},
-	                   {'id' : 'C33','letter': '','class': 'box'}
+	                   {'id' : '31','letter': '','class': 'box'},
+	                   {'id' : '32','letter': '','class': 'box'},
+	                   {'id' : '33','letter': '','class': 'box'}
 	               ]
 	           ];
 	
 	
 	function convertId(id) {
-		// incoming form A11
-		var row = id.charAt(1);
-		var column = id.charAt(2);
+		// incoming form 11,22,33,etc.
+		var row = id.charAt(0);
+		var column = id.charAt(1);
 		var position = {'row': row, 'column': column};
 		return position;
 	}
@@ -56,10 +59,10 @@ app.controller("GameController", function Hello($scope, $http, $rootScope) {
 			$scope.game = data;
 			
 			// returned data is the current game data
-			// TODO - check if win or drawn
 			if (data.status == "OPEN") {
 				getNextMove();
 			} else {
+				// TODO - already have status - look at data
 				checkGameStatus();
 			}
 			/*
@@ -91,10 +94,7 @@ app.controller("GameController", function Hello($scope, $http, $rootScope) {
             var position = convertId(column.id);
             var move = {'position': position, 'player': $scope.userLetter.toUpperCase()};
             
-            sendUserMove(move);
-            
-            // implement to get next move from the server
-            //$scope.think();
+            sendUserMove(move);           
         }
         
     };
@@ -132,10 +132,6 @@ app.controller("GameController", function Hello($scope, $http, $rootScope) {
         return true;
     };
     
-    $scope.think = function() {
-    	// TODO - make rest call
-    };
-        
     function checkGameStatus() {
     	$http.get('/api/games/'+ $scope.gameId ).success(function(data) {
     		$scope.game = data;
@@ -159,7 +155,6 @@ app.controller("GameController", function Hello($scope, $http, $rootScope) {
 	        $scope.rows[row-1][column-1].letter = player.toLowerCase();   
 	           
 	        checkGameStatus();
-	        //$scope.setUserTurn();
 	    });
     };
     
@@ -191,8 +186,6 @@ app.controller("GameController", function Hello($scope, $http, $rootScope) {
         $scope.isGameStarted = true;
         if($scope.start == 'system') {
             $scope.turn = 0;
-            // need to start game first
-            //$scope.think();
             $scope.userLetter = 'o';
             $scope.systemLetter = 'x';
             
@@ -209,7 +202,6 @@ app.controller("GameController", function Hello($scope, $http, $rootScope) {
     
 });
 
-// TODO - refresh this when a game is finished or a new one is started
 app.controller("HistoryController", function History($scope, $http) {
 		
 	$scope.getGames = function() {
