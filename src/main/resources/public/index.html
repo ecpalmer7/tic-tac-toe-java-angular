@@ -1,0 +1,73 @@
+<!doctype html>
+<html ng-app="game">
+	<head>
+		<title>Tic Tac Toe</title>
+		<script src="lib/angularjs/1.3.13/angular.min.js"></script>
+    	<script src="js/game.js"></script>
+    	<link rel="stylesheet" type="text/css" media="screen" href="css/application.css">
+    	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    	
+	</head>
+
+	<body>
+	
+		<div ng-controller="GameController">
+			<div class="gameon">
+				<div class="messageContainer" ng-show="gameover">
+            		<div class="winmessage">{{winmessage}}<br/> GAME OVER</div>
+        		</div>
+				<div class="tableContainer">
+					<div class="gametable">
+						<div ng-repeat="row in rows" class="tablerow">
+					    	<div id="{{column.id}}" class="{{column.class}}" ng-repeat="column in row" >
+					        	<div ng-click="markUserClick(column)" class="boxContent{{column.letter}}"> </div>			        	
+					    	</div>
+						</div>
+					</div>
+				</div>
+			
+		        <div class="optionsContainer">
+		            Who should start first? : <select ng-options="obj.value as obj.text for obj in startOptions" ng-model="start"></select>
+		            <select ng-options="obj.value as obj.text for obj in levelOptions" ng-model="level"></select>
+		            <input type="button" ng-click="startGame()" value="START GAME" />
+		            <br /><br />
+		            <div>Game # {{gameId}} </div>
+		            <ng-view />
+		        </div>
+	        </div>
+	        
+  		</div>		
+		
+		<div class="gamehistory">
+			<div class="gamehistoryContainer">
+				<div ng-controller="HistoryController">
+			
+					<h2 class="sub-header">Game History</h2>
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Status</th>
+									<th>Level</th>
+									<th>AI Plays As</th>
+									<th>Winner</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="game in games">
+									<td>{{game.id}}</td>
+									<td>{{game.status}}</td>
+									<td>{{game.level}}</td>
+									<td>{{game.computerPlaysAs}}</td>
+									<td>{{game.winner}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+</html>
