@@ -13,27 +13,27 @@
 
 	<body>
 	
-		<div ng-controller="GameController">
+		<div ng-controller="GameController as game">
 			<div class="gameon">
 				<div class="messageContainer" ng-show="gameover">
-            		<div class="winmessage">{{winmessage}}<br/> GAME OVER</div>
+            		<div class="winmessage">{{game.winmessage}}<br/> GAME OVER</div>
         		</div>
 				<div class="tableContainer">
 					<div class="gametable">
-						<div ng-repeat="row in rows" class="tablerow">
+						<div ng-repeat="row in game.rows" class="tablerow">
 					    	<div id="{{column.id}}" class="{{column.class}}" ng-repeat="column in row" >
-					        	<div ng-click="markUserClick(column)" class="boxContent{{column.letter}}"> </div>			        	
+					        	<div ng-click="game.markUserClick(column)" class="boxContent{{column.letter}}"> </div>			        	
 					    	</div>
 						</div>
 					</div>
 				</div>
 			
 		        <div class="optionsContainer">
-		            Who should start first? : <select ng-options="obj.value as obj.text for obj in startOptions" ng-model="start"></select>
-		            <select ng-options="obj.value as obj.text for obj in levelOptions" ng-model="level"></select>
-		            <input type="button" ng-click="startGame()" value="START GAME" />
+		            Who should start first? : <select ng-options="obj.value as obj.text for obj in game.startOptions" ng-model="game.start"></select>
+		            <select ng-options="obj.value as obj.text for obj in game.levelOptions" ng-model="game.level"></select>
+		            <input type="button" ng-click="game.startGame()" value="START GAME" />
 		            <br /><br />
-		            <div>Game # {{gameId}} </div>
+		            <div>Game # {{game.gameId}} </div>
 		            <ng-view />
 		        </div>
 	        </div>
