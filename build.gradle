@@ -32,7 +32,6 @@ cloudfoundry {
 	file = new File('build/libs/Tic.jar')
 	application = 'tic-tac-toe'
 	uri = "tic-tac-toe-tcdavid.cfapps.io"
-	//uri = "tic-tac-toe-${randomWord}.cfapps.io"
 	memory = 512
 	instances = 1
 
