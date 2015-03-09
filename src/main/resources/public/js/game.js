@@ -59,6 +59,8 @@ app.controller("GameController", function Hello($scope, $http, $rootScope) {
 			// TODO - check if win or drawn
 			if (data.status == "OPEN") {
 				getNextMove();
+			} else {
+				checkGameStatus();
 			}
 			/*
 			 var move = data.moves.pop();
@@ -139,7 +141,7 @@ app.controller("GameController", function Hello($scope, $http, $rootScope) {
     		$scope.game = data;
     		
     		if (data.status != "OPEN") {
-    			$rootScope.$broadcast("gameOver");
+    			$rootScope.$broadcast("gamesRefresh");
     		}
     		$scope.setUserTurn();
     	});
@@ -174,7 +176,7 @@ app.controller("GameController", function Hello($scope, $http, $rootScope) {
 	        	   getNextMove();
 	           }
 	           
-	           $rootScope.$broadcast("gameOver");
+	           $rootScope.$broadcast("gamesRefresh");
 	    });
     };
     
@@ -219,7 +221,7 @@ app.controller("HistoryController", function History($scope, $http) {
 	
 	$scope.getGames();
 
-	$scope.$on("gameOver",function () {
+	$scope.$on("gamesRefresh",function () {
 		$scope.getGames();
 	});
 });
