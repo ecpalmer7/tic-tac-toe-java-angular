@@ -29,8 +29,6 @@ dependencies {
 cloudfoundry {
 	target = "https://api.run.pivotal.io"
 	space = "development"
-	username = 'tim.c.david@gmail.com'
-	password = 'loop1234'
 	file = new File('build/libs/Tic.jar')
 	application = 'tic-tac-toe'
 	uri = "tic-tac-toe-tcdavid.cfapps.io"
