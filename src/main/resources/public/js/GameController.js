@@ -61,20 +61,9 @@ angular.module('gameApp.controllers').controller("GameController", function Hell
 			if (data.status == "OPEN") {
 				getNextMove();
 			} else {
-				// TODO - already have status - look at data
-				checkGameStatus();
-			}
-			/*
-			 var move = data.moves.pop();
-			
-	         var row = move.position.row;
-	         var column = move.position.column;
-	         var player = move.player;
-	           
-	         $scope.rows[row-1][column-1].letter = player.toLowerCase();   
-	           
-	         $scope.setUserTurn();
-	         */
+				$scope.setUserTurn();
+	    		$rootScope.$broadcast("gamesRefresh");
+	    	}
 	          
 	    });
 	}
