@@ -1,7 +1,13 @@
 
 
-angular.module('gameApp.controllers').controller("GameController", function Hello($http, $rootScope) {
+angular
+	.module('gameApp.controllers')
+	.controller("GameController", GameController);
+			
+HistoryController.$inject =	['$http', '$rootScope'];
 	
+function GameController($http, $rootScope) {
+
 	var vm = this;
 	
 	// added
@@ -185,8 +191,7 @@ angular.module('gameApp.controllers').controller("GameController", function Hell
         }
         
         newGame();  
-    };
-    
-});
+    };   
+};
 
 
