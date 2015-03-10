@@ -1,6 +1,11 @@
 
-angular.module('gameApp.controllers').controller("HistoryController", function History($scope, $http) {
+angular
+	.module('gameApp.controllers')
+	.controller("HistoryController", HistoryController);
 		
+HistoryController.$inject = ['$scope','$http'];
+		
+function HistoryController($scope,$http) {
 	var vm = this;
 	vm.getGames = getGames;
 	
@@ -16,4 +21,4 @@ angular.module('gameApp.controllers').controller("HistoryController", function H
 	$scope.$on("gamesRefresh",function () {
 		vm.getGames();
 	});
-});
+};
