@@ -2,12 +2,14 @@
 angular.module('gameApp.controllers').controller("HistoryController", function History($scope, $http) {
 		
 	var vm = this;
-	vm.getGames = function() {
-	    $http.get('/api/games').
+	vm.getGames = getGames;
+	
+	function getGames() {
+		 $http.get('/api/games').
 	        success(function(data) {
 	            vm.games = data;
-	        });
-		};
+	     });
+	}	
 	
 	vm.getGames();
 
