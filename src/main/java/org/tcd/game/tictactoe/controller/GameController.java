@@ -54,6 +54,12 @@ public class GameController {
         return service.find(id).get();
     }
 	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void deleteGame(@PathVariable Long id) {
+		logger.debug("delete " + id);
+        service.delete(id);
+    }
+	
 	@RequestMapping(value = "/{id}/turn ", method = RequestMethod.PUT)
 	public Game turn(@PathVariable Long id, @RequestBody Move move) {
 		

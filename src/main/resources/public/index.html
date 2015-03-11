@@ -49,6 +49,7 @@
 						<table class="table table-striped">
 							<thead>
 								<tr>
+									<th></th>
 									<th>#</th>
 									<th>Status</th>
 									<th>Level</th>
@@ -58,6 +59,7 @@
 							</thead>
 							<tbody>
 								<tr ng-repeat="game in history.games">
+									<td><input type="button" ng-click="history.deleteGame(game.id)" value="delete" /> </td>
 									<td>{{game.id}}</td>
 									<td>{{game.status}}</td>
 									<td>{{game.level}}</td>

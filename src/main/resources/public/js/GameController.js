@@ -1,5 +1,4 @@
 
-
 angular
 	.module('gameApp.controllers')
 	.controller("GameController", GameController);

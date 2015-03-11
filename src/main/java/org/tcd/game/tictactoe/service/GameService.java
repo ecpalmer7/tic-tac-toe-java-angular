@@ -14,4 +14,5 @@ public interface GameService {
 	Game addMove(Game game, Move move);
 	Move nextMove(Game game);
 	List<Game> getGames();
+	void delete(Long id);
 }

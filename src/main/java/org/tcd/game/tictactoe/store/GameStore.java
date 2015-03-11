@@ -55,8 +55,14 @@ public class GameStore {
 		Game game = map.get(id);
 		return Optional.ofNullable(game);
 	}
+	
+	public void delete(Long id) {
+		map.remove(id);
+	}
 
 	public List<Game> getGames() {
 		return new ArrayList<Game>(map.values());
 	};
+	
+	
 }

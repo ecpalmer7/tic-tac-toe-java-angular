@@ -66,5 +66,10 @@ public class GameServiceImpl implements GameService {
 	public Optional<Game> find(Long id) {
 		return store.get(id);
 	}
+	
+	@Override
+	public void delete(Long id) {
+		store.delete(id);
+	}
 
 }
