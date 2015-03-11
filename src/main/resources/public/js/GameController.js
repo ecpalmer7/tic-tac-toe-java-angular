@@ -3,7 +3,7 @@ angular
 	.module('gameApp.controllers')
 	.controller("GameController", GameController);
 			
-HistoryController.$inject =	['$http', '$rootScope'];
+GameController.$inject =	['$http', '$rootScope'];
 	
 function GameController($http, $rootScope) {
 
