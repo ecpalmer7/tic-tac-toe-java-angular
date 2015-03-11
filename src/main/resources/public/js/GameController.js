@@ -3,9 +3,9 @@ angular
 	.module('gameApp.controllers')
 	.controller("GameController", GameController);
 			
-GameController.$inject =	['$http', '$rootScope'];
+GameController.$inject = ['DataFactory', '$rootScope'];
 	
-function GameController($http, $rootScope) {
+function GameController(DataFactory, $rootScope) {
 
 	var vm = this;
 	
@@ -59,7 +59,7 @@ function GameController($http, $rootScope) {
 	}
 	
 	function sendUserMove(move) {
-		$http.put('/api/games/'+ vm.gameId +'/turn', move).success(function(data) {
+		DataFactory.sendUserMove(vm.gameId, move).success(function(data) {
     		
 			vm.game = data;
 			
@@ -126,7 +126,7 @@ function GameController($http, $rootScope) {
     };
     
     function checkGameStatus() {
-    	$http.get('/api/games/'+ vm.gameId ).success(function(data) {
+    	DataFactory.getGame(vm.gameId).success(function(data) {
     		vm.game = data;
     		
     		if (data.status != "OPEN") {
@@ -137,7 +137,7 @@ function GameController($http, $rootScope) {
     };
     
     function getNextMove() {
-    	$http.put('/api/games/'+ vm.gameId +'/autoturn').success(function(data) {
+    	DataFactory.getNextMove(vm.gameId).success(function(data) {
     		
     		vm.game = data;
     		
@@ -152,11 +152,7 @@ function GameController($http, $rootScope) {
     };
     
     function newGame( ) {
-    	var postData = {level: vm.level, computerPlaysAs: vm.systemLetter.toUpperCase()};
-    	$http.post('/api/games', postData, {
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-            params: postData
-        }).success(function(data) {
+    	DataFactory.createNewGame(vm.level, vm.systemLetter.toUpperCase()).success(function(data) {
         	vm.gameId = data.id;
 	           
 	           // if turn is system, then get next move after start
