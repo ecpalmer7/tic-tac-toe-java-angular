@@ -26,6 +26,10 @@ dependencies {
 	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
 
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.3'
+}
+
 cloudfoundry {
 	target = "https://api.run.pivotal.io"
 	space = "development"
