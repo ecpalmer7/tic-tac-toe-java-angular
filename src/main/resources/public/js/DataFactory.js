@@ -16,12 +16,12 @@ angular.module('gameApp.controllers')
         return $http.delete(urlBase + '/' + id);
     };
     
-    dataFactory.getNextMove = function () {
-    	return $http.put(urlBase + '/'+ vm.gameId +'/autoturn');
+    dataFactory.getNextMove = function (id) {
+    	return $http.put(urlBase + '/'+ id +'/autoturn');
     }
     
-    dataFactory.sendUserMove = function (move) {
-    	return $http.put(urlBase + '/'+ vm.gameId +'/turn', move);
+    dataFactory.sendUserMove = function (id, move) {
+    	return $http.put(urlBase + '/'+ id +'/turn', move);
     }
     
     dataFactory.createNewGame = function (level, computerPlaysAs) {
