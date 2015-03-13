@@ -1,4 +1,4 @@
-angular.module('gameServices')
+angular.module('services')
     .factory('DataFactory', ['$http', function($http) {
 
     var urlBase = '/api/games';

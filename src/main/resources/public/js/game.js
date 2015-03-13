@@ -1,7 +1,7 @@
 
-angular.module('gameControllers', []);
-angular.module('gameServices', []);
-angular.module('gameApp', ['gameControllers', 'gameServices']);
+angular.module('controllers', []);
+angular.module('services', []);
+angular.module('gameApp', ['controllers', 'services']);
 
 
 
