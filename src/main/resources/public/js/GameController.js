@@ -1,6 +1,6 @@
 
 angular
-	.module('gameApp.controllers')
+	.module('gameControllers')
 	.controller("GameController", GameController);
 			
 GameController.$inject = ['DataFactory', '$rootScope'];

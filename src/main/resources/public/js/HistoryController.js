@@ -1,6 +1,6 @@
 
 angular
-	.module('gameApp.controllers')
+	.module('gameControllers')
 	.controller("HistoryController", HistoryController);
 		
 HistoryController.$inject = ['$scope','DataFactory'];
