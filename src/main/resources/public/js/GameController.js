@@ -9,15 +9,13 @@ function GameController(DataFactory, $rootScope) {
 
 	var vm = this;
 	
-	// added
 	vm.gameId = null;
 	vm.game = null;
 	vm.levelOptions = [{'value' : 'HARD', 'text' : 'Hard'}, 
-	                       {'value' : 'MEDIUM', 'text' : 'Medium'}, 
-	                       {'value' : 'EASY', 'text' : 'Easy'}];
+	                   {'value' : 'MEDIUM', 'text' : 'Medium'}, 
+	                   {'value' : 'EASY', 'text' : 'Easy'}];
 	vm.level = 'HARD';
 	
-	// original
 	vm.userLetter = 'O';
 	vm.systemLetter = 'X';
 
@@ -27,26 +25,26 @@ function GameController(DataFactory, $rootScope) {
 	vm.winmessage = '';
 
 	vm.startOptions = [{'value' : 'system', 'text' : 'AI'}, 
-                           {'value' : 'user', 'text' : 'Me'}];
+                       {'value' : 'user', 'text' : 'Me'}];
 	vm.start = 'system';
 
 	vm.isGameStarted = false;
 	
 	vm.rows = [
 	               [
-	                   {'id' : '11','letter': '','class': 'box'},
-	                   {'id' : '12','letter': '','class': 'box'},
-	                   {'id' : '13','letter': '','class': 'box'}
+	                   {'id': '11', 'letter': '', 'class': 'box'},
+	                   {'id': '12', 'letter': '', 'class': 'box'},
+	                   {'id': '13', 'letter': '', 'class': 'box'}
 	               ],
 	               [
-	                   {'id' : '21','letter': '','class': 'box'},
-	                   {'id' : '22','letter': '','class': 'box'},
-	                   {'id' : '23','letter': '','class': 'box'}
+	                   {'id': '21', 'letter': '', 'class': 'box'},
+	                   {'id': '22', 'letter': '', 'class': 'box'},
+	                   {'id': '23', 'letter': '', 'class': 'box'}
 	               ],
 	               [
-	                   {'id' : '31','letter': '','class': 'box'},
-	                   {'id' : '32','letter': '','class': 'box'},
-	                   {'id' : '33','letter': '','class': 'box'}
+	                   {'id': '31', 'letter': '', 'class': 'box'},
+	                   {'id': '32', 'letter': '', 'class': 'box'},
+	                   {'id': '33', 'letter': '', 'class': 'box'}
 	               ]
 	           ];
 		
