@@ -12,6 +12,7 @@ function GameController(DataFactory, $rootScope) {
 	vm.gameId = null;
 	vm.game = null;
 	vm.levelOptions = [{'value' : 'HARD', 'text' : 'Hard'}, 
+	                   {'value' : 'MEDIUM_HARD', 'text' : 'Medium Hard'}, 
 	                   {'value' : 'MEDIUM', 'text' : 'Medium'}, 
 	                   {'value' : 'EASY', 'text' : 'Easy'}];
 	vm.level = 'HARD';

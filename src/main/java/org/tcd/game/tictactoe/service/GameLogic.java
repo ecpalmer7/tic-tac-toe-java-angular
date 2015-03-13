@@ -147,18 +147,51 @@ public class GameLogic  {
 		}
 		
 		public Position nextPosition() {
-			
-			return or(win(),
-                    block(),
-                    fork(),
-                    blockFork(),
-                    firstMove(),
-                    center(),
-                    oppositeCorner(),
-                    sandwich(),
-                    emptyCorner(),
-                    emptySide(),
-                    firstOpen());
+			switch (state.getLevel()) {
+				case HARD:
+					return or (
+							win(),
+		                    block(),
+		                    fork(),
+		                    blockFork(),
+		                    firstMove(),
+		                    center(),
+		                    oppositeCorner(),
+		                    sandwich(),
+		                    emptyCorner(),
+		                    emptySide(),
+		                    firstOpen());
+					
+				case MEDIUM_HARD:
+					return or ( 
+							win(),
+							block(),
+							firstMove(),
+							center(),
+							oppositeCorner(),
+							sandwich(),
+							emptyCorner(),
+							emptySide(),
+							firstOpen());
+					
+				case MEDIUM:
+					return or ( 
+							win(),
+							block(),							
+							emptyCorner(),
+							emptySide(),
+							firstOpen());
+					
+				case EASY:
+					return or (
+							emptyCorner(),
+							emptySide(),
+							firstOpen());
+					
+				default :
+					return firstOpen();
+				}
+	
 		}
 		
 		Position openPosition(int row, int col) {
