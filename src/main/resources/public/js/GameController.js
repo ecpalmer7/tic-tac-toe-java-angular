@@ -18,8 +18,8 @@ function GameController(DataFactory, $rootScope) {
 	vm.level = 'HARD';
 	
 	// original
-	vm.userLetter = 'o';
-	vm.systemLetter = 'x';
+	vm.userLetter = 'O';
+	vm.systemLetter = 'X';
 
 	vm.turn = 0;
 
@@ -145,7 +145,7 @@ function GameController(DataFactory, $rootScope) {
 	        var column = data.position.column;
 	        var player = data.player;
 	           
-	        vm.rows[row-1][column-1].letter = player.toLowerCase();   
+	        vm.rows[row-1][column-1].letter = player.toUpperCase();   
 	           
 	        checkGameStatus();
 	    });
@@ -175,14 +175,14 @@ function GameController(DataFactory, $rootScope) {
         vm.isGameStarted = true;
         if(vm.start == 'system') {
         	vm.turn = 0;
-        	vm.userLetter = 'o';
-        	vm.systemLetter = 'x';
+        	vm.userLetter = 'O';
+        	vm.systemLetter = 'X';
             
         }
         else {
         	vm.turn = 1;
-        	vm.userLetter = 'x';
-        	vm.systemLetter = 'o';
+        	vm.userLetter = 'X';
+        	vm.systemLetter = 'O';
         }
         
         newGame();  
