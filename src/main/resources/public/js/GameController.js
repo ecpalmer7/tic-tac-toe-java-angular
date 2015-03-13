@@ -76,6 +76,7 @@ function GameController(DataFactory, $rootScope) {
 		
 		if (vm.game) {
 			if (vm.game.status |= "OPEN") {
+				
 				return;
 			}
 		}
@@ -115,6 +116,9 @@ function GameController(DataFactory, $rootScope) {
         if (vm.checkWin(vm.systemLetter)) {
         	vm.winmessage = 'I WIN!';
         	vm.gameover = true;
+        } else if (vm.checkWin(vm.userLetter)) {
+            vm.winmessage = 'You WIN!';
+            vm.gameover = true;
         } else if (vm.checkDraw()) {
         	vm.winmessage = 'DRAW!';
         	vm.gameover = true;
