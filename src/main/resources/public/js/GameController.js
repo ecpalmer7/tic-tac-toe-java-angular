@@ -78,7 +78,7 @@ function GameController(DataFactory, $rootScope) {
 				return;
 			}
 		}
-        if(vm.turn == 1 && column.letter == '') {
+        if (vm.turn == 1 && column.letter == '') {
             column.letter = vm.userLetter;
             vm.turn = 0;
             
@@ -111,7 +111,7 @@ function GameController(DataFactory, $rootScope) {
     }
    
     vm.setUserTurn = function() {
-        if(vm.checkWin(vm.systemLetter)) {
+        if (vm.checkWin(vm.systemLetter)) {
         	vm.winmessage = 'I WIN!';
         	vm.gameover = true;
         } else if (vm.checkDraw()) {
@@ -171,7 +171,7 @@ function GameController(DataFactory, $rootScope) {
             row[0].class = row[1].class = row[2].class = 'box';
         });
         vm.isGameStarted = true;
-        if(vm.start == 'system') {
+        if (vm.start == 'system') {
         	vm.turn = 0;
         	vm.userLetter = 'O';
         	vm.systemLetter = 'X';
