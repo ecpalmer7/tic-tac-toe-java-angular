@@ -85,7 +85,7 @@ function GameController(DataFactory, $rootScope) {
             vm.turn = 0;
             
             var position = convertId(column.id);
-            var move = {'position': position, 'player': vm.userLetter.toUpperCase()};
+            var move = {'position': position, 'player': vm.userLetter};
             
             sendUserMove(move);           
         }
@@ -95,7 +95,7 @@ function GameController(DataFactory, $rootScope) {
     vm.checkWin = function(letter) {
     	
     	if (vm.game) {
-    		if ((vm.game.status == "WIN") && (vm.game.winner == letter.toUpperCase())) {
+    		if ((vm.game.status == "WIN") && (vm.game.winner == letter)) {
     			return true;
     		}
     	}
@@ -145,14 +145,14 @@ function GameController(DataFactory, $rootScope) {
 	        var column = data.position.column;
 	        var player = data.player;
 	           
-	        vm.rows[row-1][column-1].letter = player.toUpperCase();   
+	        vm.rows[row-1][column-1].letter = player;   
 	           
 	        checkGameStatus();
 	    });
     };
     
     function newGame( ) {
-    	DataFactory.createNewGame(vm.level, vm.systemLetter.toUpperCase()).success(function(data) {
+    	DataFactory.createNewGame(vm.level, vm.systemLetter).success(function(data) {
         	vm.gameId = data.id;
 	           
 	           // if turn is system, then get next move after start
