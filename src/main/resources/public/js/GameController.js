@@ -25,7 +25,6 @@ function GameController(DataFactory, $rootScope, $scope) {
 	vm.startOptions = [{'value' : 'system', 'text' : 'AI'}, 
                        {'value' : 'user', 'text' : 'Me'}];
 	vm.start = 'system';
-	vm.isGameStarted = false;
 	
 	vm.rows = [
 	               [
@@ -137,8 +136,6 @@ function GameController(DataFactory, $rootScope, $scope) {
     function getNextMove() {
     	DataFactory.getNextMove(vm.gameId).success(function(data) {
     		
-    		//vm.game = data;
-    		
  	        var row = data.position.row;
 	        var column = data.position.column;
 	        var player = data.player;
@@ -170,7 +167,6 @@ function GameController(DataFactory, $rootScope, $scope) {
             row[0].letter = row[1].letter = row[2].letter = '';
             row[0].class = row[1].class = row[2].class = 'box';
         });
-        vm.isGameStarted = true;
         if (vm.start == 'system') {
         	vm.turn = 0;
         	vm.userLetter = 'O';
