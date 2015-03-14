@@ -13,12 +13,7 @@ public class GameFactory {
 	private final AtomicLong counter = new AtomicLong();
 	
 	public Game createGame(Level level, Player computerPlaysAs) {
-		Game game = new Game(nextId(), level, computerPlaysAs);
-		return game;
+		return new Game(counter.incrementAndGet(), level, computerPlaysAs);
 	}
 	
-	// TODO - use a persistent sequence or UUID
-	private Long nextId() {
-		return counter.incrementAndGet();
-	}
 }
