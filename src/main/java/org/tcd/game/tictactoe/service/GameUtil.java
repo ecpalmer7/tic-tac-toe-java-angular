@@ -1,8 +1,9 @@
 package org.tcd.game.tictactoe.service;
 
-import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,6 @@ public class GameUtil {
 		int col = (i % 3) + 1;
 		int row = (i / 3 ) + 1;
 		return new Position( row, col);
-		
 	}
 	
 	public static List<Position> getAllPositions() {
