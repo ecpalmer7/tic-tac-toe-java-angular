@@ -33,6 +33,7 @@ public class GameUtil {
 		return positions;
 	}
 	
+	
 	public static List<List<Position>> getWinningCombos() {
 		List<List<Position>> wins = new ArrayList<List<Position>>();
 		

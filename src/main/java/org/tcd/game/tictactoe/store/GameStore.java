@@ -23,8 +23,9 @@ public class GameStore {
 	@Autowired
 	public GameStore(GameFactory factory) {
 		
-		Game game1 =factory.createGame(Level.HARD, Player.X);
-		Game game2 =factory.createGame(Level.EASY, Player.O);
+		// TODO - remove this data population used for testing
+		Game game1 = factory.createGame(Level.HARD, Player.X);
+		Game game2 = factory.createGame(Level.EASY, Player.O);
 		
 		Move move1 = new Move(1,1,Player.X);
 		Move move2 = new Move(2,1,Player.O);

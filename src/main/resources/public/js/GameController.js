@@ -3,9 +3,9 @@ angular
 	.module('controllers')
 	.controller("GameController", GameController);
 			
-GameController.$inject = ['DataFactory', '$rootScope'];
+GameController.$inject = ['DataFactory', '$rootScope', '$scope'];
 	
-function GameController(DataFactory, $rootScope) {
+function GameController(DataFactory, $rootScope, $scope) {
 
 	var vm = this;
 	
@@ -16,19 +16,15 @@ function GameController(DataFactory, $rootScope) {
 	                   {'value' : 'MEDIUM', 'text' : 'Medium'}, 
 	                   {'value' : 'EASY', 'text' : 'Easy'}];
 	vm.level = 'HARD';
-	
 	vm.userLetter = 'O';
 	vm.systemLetter = 'X';
-
 	vm.turn = 0;
-
 	vm.gameover = false;
 	vm.winmessage = '';
 
 	vm.startOptions = [{'value' : 'system', 'text' : 'AI'}, 
                        {'value' : 'user', 'text' : 'Me'}];
 	vm.start = 'system';
-
 	vm.isGameStarted = false;
 	
 	vm.rows = [
@@ -76,7 +72,6 @@ function GameController(DataFactory, $rootScope) {
 		
 		if (vm.game) {
 			if (vm.game.status |= "OPEN") {
-				
 				return;
 			}
 		}
@@ -190,6 +185,31 @@ function GameController(DataFactory, $rootScope) {
         
         newGame();  
     };   
+    
+    $scope.$on("showGame",function (events, args) {
+		var id = args;
+		
+		DataFactory.getGame(id).success(function(data) {
+        	vm.gameId = data.id;
+        	vm.game = data;
+        	vm.level = data.level;
+        	if (data.status == 'OPEN') {
+        		vm.gameover = false;
+        	} else {
+        		vm.gameover = true;
+        	}
+        	if (data.computerPlaysAs == 'X') {
+        		vm.userLetter = 'O';
+            	vm.systemLetter = 'X';
+            	vm.start = 'system';
+        	} else {
+        		vm.userLetter = 'X';
+            	vm.systemLetter = 'O';
+            	vm.start = 'user';
+        	}
+		});
+		
+	});
 };
 
 

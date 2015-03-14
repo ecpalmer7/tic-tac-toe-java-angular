@@ -3,12 +3,18 @@ angular
 	.module('controllers')
 	.controller("HistoryController", HistoryController);
 		
-HistoryController.$inject = ['$scope','DataFactory'];
+HistoryController.$inject = ['$scope','DataFactory', '$rootScope'];
 		
-function HistoryController($scope, DataFactory) {
+function HistoryController($scope, DataFactory, $rootScope) {
 	var vm = this;
 	vm.getGames = getGames;
 	vm.deleteGame = deleteGame;
+	vm.showGame = showGame;
+	
+	function showGame(e, id) {
+		e.preventDefault();
+		$rootScope.$broadcast('showGame', id);
+	}
 	
 	function getGames() {
 		DataFactory.getGames().
