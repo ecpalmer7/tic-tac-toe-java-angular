@@ -137,7 +137,7 @@ function GameController(DataFactory, $rootScope, $scope) {
     function getNextMove() {
     	DataFactory.getNextMove(vm.gameId).success(function(data) {
     		
-    		vm.game = data;
+    		//vm.game = data;
     		
  	        var row = data.position.row;
 	        var column = data.position.column;
@@ -153,12 +153,12 @@ function GameController(DataFactory, $rootScope, $scope) {
     	DataFactory.createNewGame(vm.level, vm.systemLetter).success(function(data) {
         	vm.gameId = data.id;
 	           
-	           // if turn is system, then get next move after start
-	           if (data.computerPlaysAs == 'X') {
-	        	   getNextMove();
-	           }
-	           
-	           $rootScope.$broadcast("gamesRefresh");
+           // if turn is system, then get next move after start
+           if (data.computerPlaysAs == 'X') {
+        	   getNextMove();
+           }
+           
+           $rootScope.$broadcast("gamesRefresh");
 	    });
     };
     
@@ -207,6 +207,23 @@ function GameController(DataFactory, $rootScope, $scope) {
             	vm.systemLetter = 'O';
             	vm.start = 'user';
         	}
+        	
+        	// reset the board
+        	for (var row=0; row < 3; row++) {
+        		for (var column=0; column < 3; column++) {
+        			vm.rows[row][column].letter = '';
+        		}
+        	}
+        	
+        	// apply the moves from the retrieved game
+        	data.moves.forEach(function (move) {
+	            var row = move.position.row;
+		        var column = move.position.column;
+		        var player = move.player;
+		           
+		        vm.rows[row-1][column-1].letter = player;  
+        	});
+        	
 		});
 		
 	});
