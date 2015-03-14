@@ -205,6 +205,7 @@ public class GameLogic  {
 			return getOpenPositions().iterator().next();
 		}
 		Position win() {
+			// stream first?
 			List<Position> wins = GameUtil.winningPositions(turn(), game.movesAsMap());
 			
 			if (wins.isEmpty()) {
