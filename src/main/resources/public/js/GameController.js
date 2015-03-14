@@ -193,6 +193,8 @@ function GameController(DataFactory, $rootScope, $scope) {
         	vm.gameId = data.id;
         	vm.game = data;
         	vm.level = data.level;
+        	vm.turn = 1;
+        	
         	if (data.status == 'OPEN') {
         		vm.gameover = false;
         	} else {
