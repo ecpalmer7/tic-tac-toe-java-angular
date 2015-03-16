@@ -15,12 +15,11 @@ import org.tcd.game.tictactoe.domain.Player;
 import org.tcd.game.tictactoe.domain.Status;
 import org.tcd.game.tictactoe.service.GameFactory;
 
-@Repository
 public class GameStore {
 	
-	Map<Long, Game> map = new ConcurrentHashMap<Long, Game>();
+	Map<Object, Game> map = new ConcurrentHashMap<Object, Game>();
 	
-	@Autowired
+	
 	public GameStore(GameFactory factory) {
 		
 		// TODO - remove this data population used for testing
@@ -53,12 +52,12 @@ public class GameStore {
 	};
 	
 	public Optional<Game> get(Long id){
-		Game game = map.get(id);
+		Game game = map.get(id.toString());
 		return Optional.ofNullable(game);
 	}
 	
 	public void delete(Long id) {
-		map.remove(id);
+		map.remove(id.toString());
 	}
 
 	public List<Game> getGames() {

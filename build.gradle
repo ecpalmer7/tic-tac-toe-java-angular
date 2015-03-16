@@ -5,7 +5,7 @@ buildscript {
 	}
 	dependencies { 
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.1.RELEASE")
-		classpath 'org.cloudfoundry:cf-gradle-plugin:1.0.3'
+		classpath 'org.cloudfoundry:cf-gradle-plugin:1.1.1'
 	}
 }
 apply plugin: 'spring-boot'
@@ -23,6 +23,7 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
 	compile("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
 	compile("org.springframework.boot:spring-boot-starter-actuator")
+	compile("org.springframework.boot:spring-boot-starter-data-mongodb")
 	testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
 }
 

@@ -49,19 +49,19 @@ public class GameController {
     }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Game readGame(@PathVariable Long id) {
+    public Game readGame(@PathVariable String id) {
 		logger.debug("games");
         return service.find(id).get();
     }
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void deleteGame(@PathVariable Long id) {
+    public void deleteGame(@PathVariable String id) {
 		logger.debug("delete " + id);
         service.delete(id);
     }
 	
 	@RequestMapping(value = "/{id}/turn ", method = RequestMethod.PUT)
-	public Game turn(@PathVariable Long id, @RequestBody Move move) {
+	public Game turn(@PathVariable String id, @RequestBody Move move) {
 		
 		validateGame(id);
 		
@@ -75,7 +75,7 @@ public class GameController {
 	}
 	
 	@RequestMapping(value = "/{id}/autoturn ", method = RequestMethod.PUT)
-	public Move autoTurn(@PathVariable Long id) {
+	public Move autoTurn(@PathVariable String id) {
 		
 		validateGame(id);
 		
@@ -95,7 +95,7 @@ public class GameController {
 	}
 	
 	// TODO - overload with Game object
-	private void validateGame(Long id) {
+	private void validateGame(String id) {
 		this.service.find(id).orElseThrow(
 				() -> new GameNotFoundException(id));
 	}
@@ -107,7 +107,7 @@ class GameNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public GameNotFoundException(Long id) {
+	public GameNotFoundException(String id) {
 		super("could not find game '" + id + "'.");
 	}
 }

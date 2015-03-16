@@ -6,17 +6,17 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tcd.game.tictactoe.domain.Game;
+import org.tcd.game.tictactoe.domain.GameRepository;
 import org.tcd.game.tictactoe.domain.Level;
 import org.tcd.game.tictactoe.domain.Move;
 import org.tcd.game.tictactoe.domain.Player;
 import org.tcd.game.tictactoe.domain.Status;
-import org.tcd.game.tictactoe.store.GameStore;
 
 @Service
 public class GameService  {
 
 	@Autowired
-	GameStore store;
+	GameRepository store;
 	
 	@Autowired
 	GameFactory factory;
@@ -51,14 +51,14 @@ public class GameService  {
 	}
 	
 	public List<Game> getGames() {
-		return store.getGames();
+		return store.findAll();
 	}
 
-	public Optional<Game> find(Long id) {
-		return store.get(id);
+	public Optional<Game> find(String id) {
+		return Optional.ofNullable(store.findOne(id));
 	}
 	
-	public void delete(Long id) {
+	public void delete(String id) {
 		store.delete(id);
 	}
 
