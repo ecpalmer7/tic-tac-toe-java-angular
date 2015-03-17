@@ -53,8 +53,7 @@ public class GameLogic  {
 	}
 
 	public Move nextMove() {
-		MoveGenerator moveGenerator = new MoveGenerator(game);
-		return moveGenerator.nextMove();
+		return new MoveGenerator(game).nextMove();
 	}
 			
 	public boolean isWinner(Player player) {
@@ -109,14 +108,7 @@ public class GameLogic  {
 		}
 		
 		public Move nextMove() {
-			
-			Position position = nextPosition();
-			
-			if (null == position) {
-				return null;
-			} else {
-				return new Move(position, turn());
-			}
+			return new Move(nextPosition(), turn());
 		}
 		
 		public Position nextPosition() {
