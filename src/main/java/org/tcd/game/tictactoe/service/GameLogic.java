@@ -10,6 +10,9 @@ import org.tcd.game.tictactoe.domain.Move;
 import org.tcd.game.tictactoe.domain.Player;
 import org.tcd.game.tictactoe.domain.Position;
 
+import static org.tcd.game.tictactoe.service.GameUtil.winningPositions;
+import static org.tcd.game.tictactoe.service.GameUtil.openPositions;
+
 public class GameLogic  {
 
 	private Game game;
@@ -49,7 +52,7 @@ public class GameLogic  {
 	}
 	
 	public List<Position> getOpenPositions() {
-		return GameUtil.openPositions(game.movesAsMap());
+		return openPositions(game.movesAsMap());
 	}
 
 	public Move nextMove() {
@@ -93,7 +96,7 @@ public class GameLogic  {
 		public boolean multipleWinningPositions(Position position) {
 			Map<Position, Player> map = state.movesAsMap();
 			map.put(position,  turn());
-			return (GameUtil.winningPositions(turn(), map).size() > 1);
+			return (winningPositions(turn(), map).size() > 1);
 		}
 		
 		Position or(Position ...positions ){
@@ -166,25 +169,25 @@ public class GameLogic  {
 			};
 			return null;
 		}
+		
 		Position firstOpen() {
 			return getOpenPositions().iterator().next();
 		}
+		
 		Position win() {
-			// stream first?
-			List<Position> wins = GameUtil.winningPositions(turn(), game.movesAsMap());
-			
-			if (wins.isEmpty()) {
-				return null;
-			}
-			return wins.get(0);
+			return winningPositions(turn(), game.movesAsMap())
+					.stream()
+					.findFirst()
+					.orElse(null);
 		}
+		
 		Position block() {
-			List<Position> wins = GameUtil.winningPositions(lastTurn(), game.movesAsMap());
-			if (wins.isEmpty()) {
-				return null;
-			}
-			return wins.get(0);
+			return winningPositions(lastTurn(), game.movesAsMap())
+					.stream()
+					.findFirst()
+					.orElse(null);
 		}
+		
 		Position fork() {
 			// could use this::multipleWinningPositions
 			Optional<Position> opt = getOpenPositions()
