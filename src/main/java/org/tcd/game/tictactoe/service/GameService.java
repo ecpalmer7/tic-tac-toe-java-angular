@@ -18,9 +18,6 @@ public class GameService  {
 	@Autowired
 	GameRepository store;
 	
-	@Autowired
-	GameFactory factory;
-	
 	public GameService() {}
 	
 	public Game addMove(Game state, Move move) {
@@ -45,7 +42,7 @@ public class GameService  {
 	}
 
 	public Game newGame(Level level, Player computerPlaysAs) {
-		Game game = factory.createGame(level, computerPlaysAs);
+		Game game = new Game(level, computerPlaysAs);
 		store.save(game);
 		return game;
 	}
