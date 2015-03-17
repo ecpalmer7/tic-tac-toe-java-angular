@@ -21,15 +21,16 @@ public class GameService  {
 	public GameService() {}
 	
 	public Game addMove(Game state, Move move) {
-		Game game = gameLogic(state).addMove(move);
+		GameLogic gameLogic = gameLogic(state);
+		Game game = gameLogic.addMove(move);
 		
 		// check for draw/win
-		if (gameLogic(game).isDraw()) {
+		if (gameLogic.isDraw()) {
 			game.setStatus(Status.DRAW);
-		} else if (gameLogic(game).isWinner(Player.X)) {
+		} else if (gameLogic.isWinner(Player.X)) {
 			game.setStatus(Status.WIN);
 			game.setWinner(Player.X);
-		} else if (gameLogic(game).isWinner(Player.O)) {
+		} else if (gameLogic.isWinner(Player.O)) {
 			game.setStatus(Status.WIN);
 			game.setWinner(Player.O);
 		}
