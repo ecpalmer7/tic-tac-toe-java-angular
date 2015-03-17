@@ -53,8 +53,7 @@ public class GameUtil {
 	}
 		
 	public static boolean isWinnerWithMove(Map<Position, Player> moves, Player player, Position position) {
-		Map<Position, Player> alteredMoves = new HashMap<Position, Player>();
-		alteredMoves.putAll(moves);
+		Map<Position, Player> alteredMoves = new HashMap<Position, Player>(moves);
 		alteredMoves.put(position, player);
 		return getWinningCombos().stream()
 								.anyMatch(combo -> matches(alteredMoves, player, combo));
