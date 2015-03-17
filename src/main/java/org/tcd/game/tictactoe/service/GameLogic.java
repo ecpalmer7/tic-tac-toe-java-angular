@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.tcd.game.tictactoe.domain.Game;
-import org.tcd.game.tictactoe.domain.Level;
 import org.tcd.game.tictactoe.domain.Move;
 import org.tcd.game.tictactoe.domain.Player;
 import org.tcd.game.tictactoe.domain.Position;
@@ -50,6 +49,7 @@ public class GameLogic  {
 		return !game.movesAsMap().containsKey(position);
 	}
 	
+	// TODO - stream
 	public List<Position> getOpenPositions() {
 		List<Position> openPositions = new ArrayList<Position>();
 		for (Position position: GameUtil.getAllPositions()) {
@@ -64,22 +64,7 @@ public class GameLogic  {
 		MoveGenerator moveGenerator = new MoveGenerator(game);
 		return moveGenerator.nextMove();
 	}
-	
-	public Game reset() {
-		game.getMoves().clear();
-		return game;
-	}
-	
-	public Game setLevel(Level level) {
-		this.game.setLevel(level);
-		return game;
-	}
-	
-	public Game setComputerPlaysAs(Player player) {
-		this.game.setComputerPlaysAs(player);
-		return game;
-	}
-
+			
 	public Player getHumanPlaysAs() {	
 		return game.getComputerPlaysAs() == Player.X? Player.O: Player.X;
 	}
