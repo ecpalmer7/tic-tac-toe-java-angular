@@ -13,6 +13,7 @@ import org.tcd.game.tictactoe.domain.Position;
 import static org.tcd.game.tictactoe.service.GameUtil.winningPositions;
 import static org.tcd.game.tictactoe.service.GameUtil.openPositions;
 
+
 public class GameLogic  {
 
 	private Game game;
@@ -99,9 +100,9 @@ public class GameLogic  {
 			return (winningPositions(turn(), map).size() > 1);
 		}
 		
-		Position or(Position ...positions ){
+		Position or(Position ...positions){
 			// use Stream and filter, Optional<Position>
-			Stream.of(positions);
+			// Stream.of(positions);
 			for (Position position : positions) {
 				if (position != null) {
 					return position;
@@ -161,7 +162,7 @@ public class GameLogic  {
 				}
 	
 		}
-		
+		// TODO - move 
 		Position openPosition(int row, int col) {
 			Position position = new Position(row, col);
 			if ( isOpen(position)) {
@@ -221,7 +222,7 @@ public class GameLogic  {
 		}
 		Position oppositeCorner() {
 			
-			return or(	oppositeOpen(new Position(1,1), new Position(3,3)),
+			return or (	oppositeOpen(new Position(1,1), new Position(3,3)),
 						oppositeOpen(new Position(3,3), new Position(1,1)),
 						oppositeOpen(new Position(3,1), new Position(1,3)),
 						oppositeOpen(new Position(1,3), new Position(3,1)));
@@ -238,11 +239,12 @@ public class GameLogic  {
 		}
 		
 		Position emptyCorner() {
-			return or(openPosition(1,1),
+			return or (openPosition(1,1),
 					  openPosition(1,3),
 					  openPosition(3,1),
 					  openPosition(3,3));
 		}
+		
 		Position emptySide() {
 			return or(openPosition(1,2),
 					  openPosition(2,1),

@@ -4,6 +4,7 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,15 +15,6 @@ public class GameUtil {
 
 	private GameUtil() {}
 	
-	public static Position getPosition(String index) {
-		int i = Integer.parseInt(index);
-		// need 0 to 8
-		i--;
-		int col = (i % 3) + 1;
-		int row = (i / 3 ) + 1;
-		return new Position( row, col);
-	}
-	
 	public static List<Position> getAllPositions() {
 		List<Position> positions = new ArrayList<Position>();
 		for (int row = 1; row <= 3; row++) {
@@ -32,7 +24,6 @@ public class GameUtil {
 		}
 		return positions;
 	}
-	
 	
 	public static List<List<Position>> getWinningCombos() {
 		List<List<Position>> wins = new ArrayList<List<Position>>();
@@ -61,27 +52,30 @@ public class GameUtil {
 								.anyMatch(combo -> matches(moves, player, combo));
 	}
 		
+	public static boolean isWinnerWithMove(Map<Position, Player> moves, Player player, Position position) {
+		Map<Position, Player> alteredMoves = new HashMap<Position, Player>();
+		alteredMoves.putAll(moves);
+		alteredMoves.put(position, player);
+		return getWinningCombos().stream()
+								.anyMatch(combo -> matches(alteredMoves, player, combo));
+	}
+	
 	public static boolean isOpen(Map<Position, Player> moves, Position position) {
 		return moves.get(position) == null;
 	}
 	
 	public static List<Position> openPositions(Map<Position, Player> moves) {
-		return getAllPositions().stream()
-								.filter(position -> isOpen(moves, position))
-								.collect(toList());
+		return getAllPositions()
+				.stream()
+				.filter(position -> isOpen(moves, position))
+				.collect(toList());
 	}
 		
 	public static List<Position> winningPositions(Player player, Map<Position, Player> moves) {
-		List<Position> wins = new ArrayList<Position>();
-		
-		for (Position position : openPositions(moves)) { 
-			moves.put(position, player);
-			if (isWinner(moves, player)) {
-				wins.add(position);
-			}
-			moves.remove(position);
-		}
-		return wins;
+		return openPositions(moves)
+				.stream()
+				.filter(position -> isWinnerWithMove(moves, player, position))
+				.collect(toList());
 	}
 	
 }
