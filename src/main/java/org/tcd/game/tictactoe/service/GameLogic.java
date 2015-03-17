@@ -45,7 +45,7 @@ public class GameLogic  {
 	}
 
 	public boolean isOpen(Position position) {
-		return !game.movesAsMap().containsKey(position);
+		return null == game.playerAt(position);
 	}
 	
 	public List<Position> getOpenPositions() {
