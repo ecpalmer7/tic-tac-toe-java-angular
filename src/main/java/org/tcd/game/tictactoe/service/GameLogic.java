@@ -1,6 +1,5 @@
 package org.tcd.game.tictactoe.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -30,7 +29,7 @@ public class GameLogic  {
 	}
 
 	public Player turn() {
-		int count = game.movesAsMap().keySet().size();
+		int count = game.getMoves().size();
 		if ( (count & 1) == 0 ) {
 			return Player.X;
 		}
@@ -49,15 +48,8 @@ public class GameLogic  {
 		return !game.movesAsMap().containsKey(position);
 	}
 	
-	// TODO - stream
 	public List<Position> getOpenPositions() {
-		List<Position> openPositions = new ArrayList<Position>();
-		for (Position position: GameUtil.getAllPositions()) {
-			if (isOpen(position)) {
-				openPositions.add(position);
-			}
-		}
-		return openPositions;
+		return GameUtil.openPositions(game.movesAsMap());
 	}
 
 	public Move nextMove() {
