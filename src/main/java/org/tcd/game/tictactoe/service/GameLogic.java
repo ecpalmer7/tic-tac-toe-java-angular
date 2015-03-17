@@ -57,10 +57,6 @@ public class GameLogic  {
 		return moveGenerator.nextMove();
 	}
 			
-	public Player getHumanPlaysAs() {	
-		return game.getComputerPlaysAs() == Player.X? Player.O: Player.X;
-	}
-
 	public boolean isWinner(Player player) {
 		return GameUtil.isWinner(game.movesAsMap(), player);
 	}
