@@ -56,6 +56,14 @@ public class Game {
 		this.moves = moves;
 	}
 
+	public Player playerAt(int row, int col) {
+		return playerAt(new Position(row, col));
+	}
+	
+	public Player playerAt(Position position) {
+		return movesAsMap().get(position);
+	}
+	
 	public Map<Position, Player> movesAsMap() {
 		
 		Map<Position, Player> map = new HashMap<Position, Player>();

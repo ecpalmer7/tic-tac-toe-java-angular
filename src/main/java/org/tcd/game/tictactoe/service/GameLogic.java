@@ -66,12 +66,12 @@ public class GameLogic  {
 	}
 	
 	public boolean isInPosition(Player player, int row, int col) {
-		return (player == game.movesAsMap().get(new Position(row, col)));
+		return (player == game.playerAt(row, col));
 	}
 	
 	public Position oppositeOpen(Position position1, Position position2) {
 		Player player = lastTurn();
-		if (isOpen(position1) && player == game.movesAsMap().get(position2)) {
+		if (isOpen(position1) && player == game.playerAt(position2)) {
 			return position1;
 		}
 		return null;
@@ -80,8 +80,8 @@ public class GameLogic  {
 	public Position sandwichOpen(Position position1, Position position2 ) {
 		Position middle = new Position(2,2);
 		if (isOpen(position1) && 
-				(Player.O == game.movesAsMap().get(middle)) &&
-				(Player.X == game.movesAsMap().get(position2))) {
+				(Player.O == game.playerAt(middle)) &&
+				(Player.X == game.playerAt(position2))) {
 			
 			return position1;
 		}
