@@ -33,8 +33,8 @@ public class GameService  {
 			game.setStatus(Status.WIN);
 			game.setWinner(Player.O);
 		}
-		store.save(game);
-		return game;
+		return store.save(game);
+
 	}
 
 	public Move nextMove(Game game) {
@@ -42,9 +42,7 @@ public class GameService  {
 	}
 
 	public Game newGame(Level level, Player computerPlaysAs) {
-		Game game = new Game(level, computerPlaysAs);
-		store.save(game);
-		return game;
+		return store.save(new Game(level, computerPlaysAs));
 	}
 	
 	public List<Game> getGames() {
