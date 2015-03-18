@@ -55,17 +55,15 @@
 									<th>Status</th>
 									<th>Level</th>
 									<th>AI Plays As</th>
-									<th>Winner</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr ng-repeat="game in history.games">
 									<td><input type="button" ng-click="history.deleteGame(game.id)" value="delete" /> </td>
 									<td><a ng-click="history.showGame($event, game.id)" href="/game" >{{game.id}}</a></td>
-									<td>{{game.status}}</td>
+									<td>{{game.status=='WIN' ? game.status + " - " + game.winner : game.status}}</td>
 									<td>{{game.level}}</td>
 									<td>{{game.computerPlaysAs}}</td>
-									<td>{{game.winner}}</td>
 								</tr>
 							</tbody>
 						</table>

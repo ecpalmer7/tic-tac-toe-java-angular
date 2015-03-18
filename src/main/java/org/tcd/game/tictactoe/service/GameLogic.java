@@ -3,8 +3,6 @@ package org.tcd.game.tictactoe.service;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Stream;
-
 import org.tcd.game.tictactoe.domain.Game;
 import org.tcd.game.tictactoe.domain.Move;
 import org.tcd.game.tictactoe.domain.Player;
@@ -27,9 +25,9 @@ public class GameLogic  {
 		if (isOpen(move.getPosition())) {
 			game.addMove(move);
 		}
-		// else throw exception
+		// else throw exception?
 		
-		return new Game(game.getId(), game.getMoves(), game.getLevel(), game.getComputerPlaysAs());
+		return game;
 	}
 
 	public Player turn() {
@@ -239,7 +237,7 @@ public class GameLogic  {
 		}
 		
 		Position emptyCorner() {
-			return or (openPosition(1,1),
+			return or(openPosition(1,1),
 					  openPosition(1,3),
 					  openPosition(3,1),
 					  openPosition(3,3));
