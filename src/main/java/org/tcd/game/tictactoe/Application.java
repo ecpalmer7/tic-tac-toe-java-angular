@@ -7,10 +7,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.tcd.game.tictactoe.domain.Game;
-import org.tcd.game.tictactoe.domain.GameRepository;
 import org.tcd.game.tictactoe.domain.Level;
 import org.tcd.game.tictactoe.domain.Move;
 import org.tcd.game.tictactoe.domain.Player;
+import org.tcd.game.tictactoe.service.GameService;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
@@ -18,7 +18,7 @@ public class Application implements CommandLineRunner {
 	Logger logger = LoggerFactory.getLogger(Application.class);
 	
 	@Autowired
-	GameRepository repository;
+	GameService service;
 	
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -28,24 +28,16 @@ public class Application implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
     	logger.debug("Deleting existing games");
-		repository.deleteAll();
+		service.deleteAll();
 
 		// save a couple of games
-		Game game1 = repository.save(new Game(Level.EASY, Player.X));
-		game1.addMove(new Move(3, 3, Player.X));
-		repository.save(game1);
+		Game game1 = service.newGame(Level.EASY, Player.X);
+		service.addMove(game1, new Move(3, 3, Player.X));
 		
-		Game game2 = repository.save(new Game(Level.HARD, Player.O));
-		game2.addMove(new Move(1, 3, Player.X));
-		game2.addMove(new Move(2, 2, Player.O));
-		repository.save(game2);
+		Game game2 = service.newGame(Level.HARD, Player.O);
+		service.addMove(game2, new Move(1, 3, Player.X));
+		service.addMove(game2, new Move(2, 2, Player.O));
 		
-		// fetch all games
-		logger.debug("Games found with findAll():");
-		logger.debug("-------------------------------");
-		for (Game game : repository.findAll()) {
-			logger.debug(game.toString());
-		}
 		logger.debug("init done");
     }
 }

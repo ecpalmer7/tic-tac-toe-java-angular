@@ -34,7 +34,7 @@
 		            <select ng-options="obj.value as obj.text for obj in game.levelOptions" ng-model="game.level"></select>
 		            <input type="button" ng-click="game.startGame()" value="START GAME" />
 		            <br /><br />
-		            <div>Game # {{game.gameId}} </div>
+		            <div>Game # {{game.game.sequence}} </div>
 		            <ng-view />
 		        </div>
 	        </div>
@@ -50,20 +50,22 @@
 						<table class="table table-striped">
 							<thead>
 								<tr>
-									<th></th>
 									<th>#</th>
 									<th>Status</th>
 									<th>Level</th>
 									<th>AI Plays As</th>
+									<th></th>	
+									<th></th>					
 								</tr>
 							</thead>
 							<tbody>
 								<tr ng-repeat="game in history.games">
-									<td><input type="button" ng-click="history.deleteGame(game.id)" value="delete" /> </td>
-									<td><a ng-click="history.showGame($event, game.id)" href="/game" >{{game.id}}</a></td>
+									<td>{{game.sequence}}</td>
 									<td>{{game.status=='WIN' ? game.status + " - " + game.winner : game.status}}</td>
 									<td>{{game.level}}</td>
 									<td>{{game.computerPlaysAs}}</td>
+									<td><a ng-click="history.showGame($event, game.id)" href="/game" >{{game.status=='WIN' || game.status=='DRAW' ? "view" : "resume"}}</a></td>									
+									<td><input type="button" ng-click="history.deleteGame(game.id)" value="delete" /> </td>
 								</tr>
 							</tbody>
 						</table>

@@ -17,6 +17,7 @@ public class Game {
 	private Player computerPlaysAs;
 	private Status status;
 	private Player winner;
+	private Long sequence;
 	
 	public Game() {}
 	
@@ -26,6 +27,11 @@ public class Game {
 		this.computerPlaysAs = computerPlaysAs;
 		this.id = id;
 		this.setStatus(Status.OPEN);
+	}
+	
+	public Game(Long sequence, Level level, Player computerPlaysAs) {
+		this(level, computerPlaysAs);
+		this.sequence = sequence;
 	}
 	
 	public Game(Level level, Player computerPlaysAs) {
@@ -48,6 +54,14 @@ public class Game {
 		moves.add(move);
 	}
 	
+	public Long getSequence() {
+		return sequence;
+	}
+
+	public void setSequence(Long visibleId) {
+		this.sequence = visibleId;
+	}
+
 	public List<Move> getMoves() {
 		return moves;
 	}

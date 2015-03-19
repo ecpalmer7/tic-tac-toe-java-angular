@@ -2,6 +2,7 @@ package org.tcd.game.tictactoe.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ import org.tcd.game.tictactoe.domain.Status;
 @Service
 public class GameService  {
 
+	private AtomicLong sequence = new AtomicLong(1);
+	
 	@Autowired
 	GameRepository store;
 	
@@ -43,7 +46,7 @@ public class GameService  {
 	}
 
 	public Game newGame(Level level, Player computerPlaysAs) {
-		return store.save(new Game(level, computerPlaysAs));
+		return store.save(new Game(sequence.getAndIncrement(), level, computerPlaysAs));
 	}
 	
 	public List<Game> getGames() {
@@ -60,6 +63,10 @@ public class GameService  {
 
 	protected GameLogic gameLogic (Game game) {
 		return new GameLogic(game);
+	}
+
+	public void deleteAll() {
+		store.deleteAll();
 	}
 
 }
