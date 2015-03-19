@@ -23,7 +23,8 @@ function HistoryController($scope, DataFactory, $rootScope) {
 	        });
 	}	
 	
-	function deleteGame(id) {
+	function deleteGame(e, id) {
+		e.preventDefault();
 		DataFactory.deleteGame(id).
         	success(function(data) {
         		// refresh

@@ -65,7 +65,7 @@
 									<td>{{game.level}}</td>
 									<td>{{game.computerPlaysAs}}</td>
 									<td><a ng-click="history.showGame($event, game.id)" href="/game" >{{game.status=='WIN' || game.status=='DRAW' ? "view" : "resume"}}</a></td>									
-									<td><input type="button" ng-click="history.deleteGame(game.id)" value="delete" /> </td>
+									<td><a ng-click="history.deleteGame($event, game.id)" href="/game">delete</a></td>
 								</tr>
 							</tbody>
 						</table>
