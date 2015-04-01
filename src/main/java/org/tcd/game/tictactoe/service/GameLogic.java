@@ -3,6 +3,8 @@ package org.tcd.game.tictactoe.service;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Stream;
+
 import org.tcd.game.tictactoe.domain.Game;
 import org.tcd.game.tictactoe.domain.Move;
 import org.tcd.game.tictactoe.domain.Player;
@@ -14,7 +16,7 @@ import static org.tcd.game.tictactoe.service.GameUtil.openPositions;
 
 public class GameLogic  {
 
-	private Game game;
+	private final Game game;
 	
 	public GameLogic(Game game) {
 		this.game = game;
@@ -86,7 +88,7 @@ public class GameLogic  {
 	}
 	
 	public class MoveGenerator {
-		Game state;
+		private final Game state;
 		
 		MoveGenerator(Game state) {
 			this.state = state;
@@ -99,14 +101,10 @@ public class GameLogic  {
 		}
 		
 		Position or(Position ...positions){
-			// use Stream and filter, Optional<Position>
-			// Stream.of(positions);
-			for (Position position : positions) {
-				if (position != null) {
-					return position;
-				}
-			}
-			return null;
+			return Stream.of(positions)
+					.filter(position -> position != null)
+					.findFirst()
+					.orElse(null);
 		}
 		
 		public Move nextMove() {
