@@ -11,7 +11,6 @@ import org.tcd.game.tictactoe.domain.GameRepository;
 import org.tcd.game.tictactoe.domain.Level;
 import org.tcd.game.tictactoe.domain.Move;
 import org.tcd.game.tictactoe.domain.Player;
-import org.tcd.game.tictactoe.domain.Status;
 
 @Service
 public class GameService  {
@@ -23,22 +22,9 @@ public class GameService  {
 	
 	public GameService() {}
 	
-	public Game addMove(Game state, Move move) {
-		GameLogic gameLogic = gameLogic(state);
-		Game game = gameLogic.addMove(move);
-		
-		// check for draw/win
-		if (gameLogic.isDraw()) {
-			game.setStatus(Status.DRAW);
-		} else if (gameLogic.isWinner(Player.X)) {
-			game.setStatus(Status.WIN);
-			game.setWinner(Player.X);
-		} else if (gameLogic.isWinner(Player.O)) {
-			game.setStatus(Status.WIN);
-			game.setWinner(Player.O);
-		}
-		return store.save(game);
-
+	public Game addMove(Game game, Move move) {
+		Game modifiedGame = gameLogic(game).addMove(move);
+		return store.save(modifiedGame);
 	}
 
 	public Move nextMove(Game game) {
