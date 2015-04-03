@@ -15,7 +15,7 @@ public class GameUtil {
 
 	private GameUtil() {}
 	
-	public static List<Position> getAllPositions() {
+	static List<Position> getAllPositions() {
 		List<Position> positions = new ArrayList<Position>();
 		for (int row = 1; row <= 3; row++) {
 			for (int col = 1; col <= 3; col++) {
@@ -25,7 +25,7 @@ public class GameUtil {
 		return positions;
 	}
 	
-	public static List<List<Position>> getWinningCombos() {
+	static List<List<Position>> getWinningCombos() {
 		List<List<Position>> wins = new ArrayList<List<Position>>();
 		
 		wins.add(asList(new Position(1,1), new Position(1,2), new Position(1,3)));
@@ -42,7 +42,7 @@ public class GameUtil {
 		return wins;	
 	}
 		
-	public static boolean matches(Map<Position, Player> moves, Player player,  List<Position> winningCombo) {
+	static boolean matches(Map<Position, Player> moves, Player player,  List<Position> winningCombo) {
 		return winningCombo.stream()
 					.allMatch(position -> moves.get(position) == player);
 	}

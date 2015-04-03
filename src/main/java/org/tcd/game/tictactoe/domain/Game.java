@@ -21,27 +21,19 @@ public class Game {
 	
 	public Game() {}
 	
-	public Game(String id, List<Move> moves, Level level, Player computerPlaysAs) {
+	public Game(String id, List<Move> moves, Level level, Player computerPlaysAs, Long sequence) {
 		this.moves = moves;
 		this.level = level;
 		this.computerPlaysAs = computerPlaysAs;
 		this.id = id;
 		this.setStatus(Status.OPEN);
-	}
-	
-	public Game(Long sequence, Level level, Player computerPlaysAs) {
-		this(level, computerPlaysAs);
 		this.sequence = sequence;
 	}
 	
-	public Game(Level level, Player computerPlaysAs) {
-		this(null, new ArrayList<Move>(), level, computerPlaysAs);
+	public Game( Level level, Player computerPlaysAs, Long sequence) {
+		this(null, new ArrayList<Move>(), level, computerPlaysAs, sequence);
 	}
-
-	public Game(String id, Level level, Player computerPlaysAs) {
-		this(id, new ArrayList<Move>(), level, computerPlaysAs);
-	}
-	
+		
 	public String getId() {
 		return id;
 	}

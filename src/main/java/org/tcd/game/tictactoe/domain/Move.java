@@ -3,15 +3,7 @@ package org.tcd.game.tictactoe.domain;
 public class Move {
 	private Position position;
 	private Player player;
-	
-	
-	/*
-	 * @JsonCreator
-	 * public Product(@JsonProperty("name") String name) {
-	 * .this.name = name;
-	 * }
-	 */
-	
+		
 	// for marshalling, unmarshalling
 	public Move() {}
 	

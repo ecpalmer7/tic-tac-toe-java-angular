@@ -20,7 +20,7 @@ public class GameLogicTest {
 	@Test
 	public void testNextMoveFork() throws Exception {
 		
-		Game game = new Game(Level.HARD, Player.X);
+		Game game = new Game(Level.HARD, Player.X, null);
 		
 		game.addMove(new Move(2,1, Player.X));
 		game.addMove(new Move(2,2, Player.O));
@@ -36,7 +36,7 @@ public class GameLogicTest {
 	@Test
 	public void testNextMoveBlockFork() throws Exception {
 		
-		Game game = new Game(Level.HARD, Player.O);
+		Game game = new Game(Level.HARD, Player.O, null);
 		
 		game.addMove(new Move(1,1, Player.X));
 		game.addMove(new Move(2,2, Player.O));
@@ -51,7 +51,7 @@ public class GameLogicTest {
 	@Test
 	public void testNextMoveOppositeCorner() throws Exception {
 		
-		Game game = new Game(Level.HARD, Player.O);
+		Game game = new Game(Level.HARD, Player.O, null);
 		
 		game.addMove(new Move(1,1, Player.X));
 		game.addMove(new Move(2,2, Player.O));
@@ -72,7 +72,7 @@ public class GameLogicTest {
 		
 		List<Move> moves = new ArrayList<Move>();
 		moves.add(new Move( new Position(2,2), Player.X));
-		state = new Game(null, moves, Level.HARD, Player.X);
+		state = new Game(null, moves, Level.HARD, Player.X, null);
 		
 		logic = new GameLogic(state);
 		assertEquals(Player.O, logic.turn());
@@ -87,6 +87,6 @@ public class GameLogicTest {
 	}
 	
 	private Game emptyGame() {
-		return new Game(Level.HARD, Player.X);
+		return new Game(Level.HARD, Player.X, null);
 	}
 }

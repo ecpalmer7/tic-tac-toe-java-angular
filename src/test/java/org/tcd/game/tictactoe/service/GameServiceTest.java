@@ -26,7 +26,7 @@ public class GameServiceTest {
 	}
 	
 	private Game emptyGame() {
-		return new Game(Level.HARD, Player.X);
+		return new Game(Level.HARD, Player.X, null);
 	}
 
 }

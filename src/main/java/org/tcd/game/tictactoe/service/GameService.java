@@ -32,7 +32,7 @@ public class GameService  {
 	}
 
 	public Game newGame(Level level, Player computerPlaysAs) {
-		return store.save(new Game(sequence.getAndIncrement(), level, computerPlaysAs));
+		return store.save(new Game(level, computerPlaysAs, sequence.getAndIncrement()));
 	}
 	
 	public List<Game> getGames() {
