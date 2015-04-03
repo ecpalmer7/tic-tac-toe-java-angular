@@ -26,7 +26,7 @@ public class Game {
 		this.level = level;
 		this.computerPlaysAs = computerPlaysAs;
 		this.id = id;
-		this.setStatus(Status.OPEN);
+		this.status = Status.OPEN;
 		this.sequence = sequence;
 	}
 	
