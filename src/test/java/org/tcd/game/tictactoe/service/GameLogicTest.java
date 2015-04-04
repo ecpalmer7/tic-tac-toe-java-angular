@@ -66,15 +66,15 @@ public class GameLogicTest {
 	@Test
 	public void testTurn() throws Exception {
 		
-		Game state = emptyGame();
-		logic = new GameLogic(state);
+		Game game = emptyGame();
+		logic = new GameLogic(game);
 		assertEquals(Player.X, logic.turn());
 		
 		List<Move> moves = new ArrayList<Move>();
 		moves.add(new Move( new Position(2,2), Player.X));
-		state = new Game(null, moves, Level.HARD, Player.X, null);
+		game = new Game(null, moves, Level.HARD, Player.X, null);
 		
-		logic = new GameLogic(state);
+		logic = new GameLogic(game);
 		assertEquals(Player.O, logic.turn());
 		
 	}

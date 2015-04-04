@@ -100,7 +100,7 @@ public class GameLogic  {
 	
 	boolean multipleWinningPositions(Position position) {
 		Map<Position, Player> map = game.movesAsMap();
-		map.put(position,  turn());
+		map.put(position, turn());
 		return (winningPositions(turn(), map).size() > 1);
 	}
 	
@@ -186,10 +186,9 @@ public class GameLogic  {
 	}
 		
 	Position fork() {
-		// could use this::multipleWinningPositions
 		Optional<Position> opt = getOpenPositions()
 				.stream()
-				.filter(p -> multipleWinningPositions(p))
+				.filter(this::multipleWinningPositions)
 				.findFirst();
 		
 		if (opt.isPresent()) {
@@ -220,7 +219,6 @@ public class GameLogic  {
 	}
 	
 	Position oppositeCorner() {
-		
 		return or (	oppositeOpen(new Position(1,1), new Position(3,3)),
 					oppositeOpen(new Position(3,3), new Position(1,1)),
 					oppositeOpen(new Position(3,1), new Position(1,3)),
@@ -232,7 +230,6 @@ public class GameLogic  {
 	}
 	
 	Position sandwich() {
-		
 		return or ( sandwichOpen(new Position(3,3), new Position(1,1)),
 				    sandwichOpen(new Position(1,1), new Position(3,3)),
 				    sandwichOpen(new Position(3,1), new Position(1,3)),
