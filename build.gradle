@@ -15,7 +15,7 @@ apply plugin: 'cloudfoundry'
 
 sourceCompatibility = 1.8
 
-ext { springBootVersion = '1.2.1.RELEASE' }
+ext { springBootVersion = '1.2.3.RELEASE' }
 
 repositories { mavenCentral() }
 
