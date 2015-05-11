@@ -24,90 +24,90 @@ import org.springframework.http.HttpStatus;
 @RequestMapping("/api/games")
 public class GameController {
 
-	Logger logger = LoggerFactory.getLogger(GameController.class);
+    Logger logger = LoggerFactory.getLogger(GameController.class);
 
-	@Autowired
-	GameService service;
-	
-	public GameController() {
-		logger.debug("created");
-	}
+    @Autowired
+    GameService service;
 
-	// TODO -  take data in RequestBody of "Options"
-	@RequestMapping(value = "", method = RequestMethod.POST)
-    public Game newGame(@RequestParam(value="level", defaultValue="HARD") Level level, 
-    					@RequestParam(value="computerPlaysAs", defaultValue="O") Player computerPlaysAs) {
-		
-		logger.debug("newGame: level=" + level + " player=" + computerPlaysAs);
+    public GameController() {
+        logger.debug("created");
+    }
+
+    // TODO - take data in RequestBody of "Options"
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public Game newGame(
+            @RequestParam(value = "level", defaultValue = "HARD") Level level,
+            @RequestParam(value = "computerPlaysAs", defaultValue = "O") Player computerPlaysAs) {
+
+        logger.debug("newGame: level=" + level + " player=" + computerPlaysAs);
         return service.newGame(level, computerPlaysAs);
     }
-	
-	@RequestMapping(value = "", method = RequestMethod.GET)
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public List<Game> readGames() {
-		logger.debug("games");
+        logger.debug("games");
         return service.getGames();
     }
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Game readGame(@PathVariable String id) {
-		logger.debug("games");
+        logger.debug("games");
         return service.find(id).get();
     }
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteGame(@PathVariable String id) {
-		logger.debug("delete " + id);
+        logger.debug("delete " + id);
         service.delete(id);
     }
-	
-	@RequestMapping(value = "/{id}/turn ", method = RequestMethod.PUT)
-	public Game turn(@PathVariable String id, @RequestBody Move move) {
-		
-		validateGame(id);
-		
-		logger.debug("turn - " + move);
-		
-		Optional<Game> game = service.find(id);
-		
-		// TODO - check for open game, valid move
-		
-		return service.addMove(game.get(), move);
-	}
-	
-	@RequestMapping(value = "/{id}/autoturn ", method = RequestMethod.PUT)
-	public Move autoTurn(@PathVariable String id) {
-		
-		validateGame(id);
-		
-		logger.debug("autoturn");
-		
-		Optional<Game> game = service.find(id);
-		
-		// TODO - check for open game
-		
-		Move move = service.nextMove(game.get());
-				
-		logger.debug("autoturn returning " + move);
-		
-		service.addMove(game.get(), move);
-		
-		return move;
-	}
-	
-	// TODO - overload with Game object
-	private void validateGame(String id) {
-		this.service.find(id).orElseThrow(
-				() -> new GameNotFoundException(id));
-	}
-	
+
+    @RequestMapping(value = "/{id}/turn ", method = RequestMethod.PUT)
+    public Game turn(@PathVariable String id, @RequestBody Move move) {
+
+        validateGame(id);
+
+        logger.debug("turn - " + move);
+
+        Optional<Game> game = service.find(id);
+
+        // TODO - check for open game, valid move
+
+        return service.addMove(game.get(), move);
+    }
+
+    @RequestMapping(value = "/{id}/autoturn ", method = RequestMethod.PUT)
+    public Move autoTurn(@PathVariable String id) {
+
+        validateGame(id);
+
+        logger.debug("autoturn");
+
+        Optional<Game> game = service.find(id);
+
+        // TODO - check for open game
+
+        Move move = service.nextMove(game.get());
+
+        logger.debug("autoturn returning " + move);
+
+        service.addMove(game.get(), move);
+
+        return move;
+    }
+
+    // TODO - overload with Game object
+    private void validateGame(String id) {
+        this.service.find(id).orElseThrow(() -> new GameNotFoundException(id));
+    }
+
 }
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
 class GameNotFoundException extends RuntimeException {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public GameNotFoundException(String id) {
-		super("could not find game '" + id + "'.");
-	}
+    public GameNotFoundException(String id) {
+        super("could not find game '" + id + "'.");
+    }
 }

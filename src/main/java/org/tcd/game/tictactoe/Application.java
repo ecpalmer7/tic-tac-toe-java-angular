@@ -14,30 +14,30 @@ import org.tcd.game.tictactoe.service.GameService;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
-	
-	Logger logger = LoggerFactory.getLogger(Application.class);
-	
-	@Autowired
-	GameService service;
-	
+
+    Logger logger = LoggerFactory.getLogger(Application.class);
+
+    @Autowired
+    GameService service;
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
-    
+
     @Override
-	public void run(String... args) throws Exception {
+    public void run(String... args) throws Exception {
 
-    	logger.debug("Deleting existing games");
-		service.deleteAll();
+        logger.debug("Deleting existing games");
+        service.deleteAll();
 
-		// save a couple of games
-		Game game1 = service.newGame(Level.EASY, Player.X);
-		service.addMove(game1, new Move(3, 3, Player.X));
-		
-		Game game2 = service.newGame(Level.HARD, Player.O);
-		service.addMove(game2, new Move(1, 3, Player.X));
-		service.addMove(game2, new Move(2, 2, Player.O));
-		
-		logger.debug("init done");
+        // save a couple of games
+        Game game1 = service.newGame(Level.EASY, Player.X);
+        service.addMove(game1, new Move(3, 3, Player.X));
+
+        Game game2 = service.newGame(Level.HARD, Player.O);
+        service.addMove(game2, new Move(1, 3, Player.X));
+        service.addMove(game2, new Move(2, 2, Player.O));
+
+        logger.debug("init done");
     }
 }
